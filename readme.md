@@ -1,26 +1,10 @@
-# wik-dps-tp001 (Rust)
+# wik-dps-tp02 (Rust)
 
-## Start project
-### Start project without setting port
+## Start project with docker
 ```sh
-cargo run
-```
+docker build -t wikdpstp02 .
 
-Default port is `8080`
-
-### Start project with setting port
-#### Windows
-```sh
-cargo build
-
-export PING_LISTEN_PORT=3000 && ./target/debug/wok-dps-tp001
-```
-
-#### Linux / MacOS
-```sh
-cargo build
-
-PING_LISTEN_PORT=3000 ./target/debug/wok-dps-tp001
+docker run -p -it 8080:8080 wikdpstp02
 ```
 
 # Usage
