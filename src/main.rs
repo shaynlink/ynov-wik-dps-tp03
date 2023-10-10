@@ -12,7 +12,7 @@ fn main() {
         Err(_) => "8080".to_string(),
     };
 
-    let listener = TcpListener::bind(format!("127.0.0.1:{}", port)).unwrap();
+    let listener = TcpListener::bind(format!("0.0.0.0:{}", port)).unwrap();
 
     println!("Listening on port {}", port);
 
