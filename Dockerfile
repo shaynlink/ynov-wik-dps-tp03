@@ -2,7 +2,7 @@ FROM rust:1.73
 
 RUN useradd -ms /bin/bash wikdps
 
-WORKDIR /usr/app
+WORKDIR /home/wikdps/app
 
 COPY . ./
 
