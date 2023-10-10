@@ -1,0 +1,19 @@
+# STAGE 1 : Build api
+FROM rust:1.73-slim AS builder
+
+WORKDIR /app
+
+COPY . ./
+
+ENV RUSTFLAGS="-C target-feature=+crt-static"
+
+RUN cargo build --release
+
+# STAGE 2 : Launch api
+FROM scratch
+
+COPY --from=builder /app/target/release/wik-dps-tp01 /app/wik-dps-tp01
+
+EXPOSE 8080
+
+CMD ["/app/wik-dps-tp01"]
