@@ -1,9 +1,11 @@
-use std::env;
 use std::{
+    env,
     io::{prelude::*, BufReader},
     net::{TcpListener, TcpStream},
     collections::HashMap,
+    thread,
 };
+use gethostname::gethostname;
 
 fn main() {
     // Result<T, E>
@@ -19,7 +21,9 @@ fn main() {
     for stream in listener.incoming() {
         let stream = stream.unwrap();
 
-        handle_connection(stream);
+        thread::spawn(|| {
+            handle_connection(stream);
+        });
     }
 }
 
@@ -44,8 +48,6 @@ fn handle_connection(mut stream: TcpStream) {
     // Get http version
     let http_version = request_line.split(" ").collect::<Vec<_>>()[2];
 
-    println!("{:?}", http_version);
-
     if http_version != "HTTP/1.1" {
         let contents = "";
         let length = contents.len();
@@ -62,6 +64,9 @@ fn handle_connection(mut stream: TcpStream) {
         let length = contents.len();
 
         let response = format!("{status_line}\r\nContent-Length: {length}\r\n\r\n{contents}");
+
+        // Get computer hostname
+       println!("{:?}", gethostname());
 
         stream.write_all(response.as_bytes()).unwrap()
     } else {
