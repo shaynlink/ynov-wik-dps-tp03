@@ -1,19 +1,9 @@
-# wik-dps-tp02 (Rust)
+# wik-dps-tp03 (Rust)
 
 ## Start project 
 
-### With Docker (single stage)
 ```sh
-docker build -t wikdpstp02:latest -f Dockerfile .
-
-docker run -it -p 8080:8080 wikdpstp02:latest
-```
-
-### With Docker (multi stages)
-```sh
-docker build -t wikdpstp02:latest -f Dockerfile.multistage .
-
-docker run -it -p 8080:8080 wikdpstp02:latest
+docker compose up
 ```
 
 # Usage
